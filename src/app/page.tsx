@@ -52,7 +52,7 @@ export default function Home() {
             overflow: "visible",
           }}
         >
-          {/* Unicorn Studio AI Orb */}
+          {/* Orb frame: outer border ring */}
           <div
             style={{
               width: 36,
@@ -65,20 +65,30 @@ export default function Home() {
               border: "1px solid #252527",
               background: "#0A0A0B",
               boxSizing: "border-box",
-              overflow: "hidden",
             }}
           >
+            {/* Inner mask: clips the orb so fuzzy edges hide behind the border */}
             <div
-              data-us-project="z71YPGJALoAcv8R1HEZD"
               style={{
                 position: "absolute",
-                top: "50%",
-                left: "50%",
-                width: "160%",
-                height: "160%",
-                transform: "translate(-50%, -50%)",
+                inset: 1,
+                borderRadius: "50%",
+                overflow: "hidden",
               }}
-            ></div>
+            >
+              {/* Orb embed: oversized so edges tuck behind the border */}
+              <div
+                data-us-project="z71YPGJALoAcv8R1HEZD"
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  width: "180%",
+                  height: "180%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              ></div>
+            </div>
           </div>
           <span
             style={{
