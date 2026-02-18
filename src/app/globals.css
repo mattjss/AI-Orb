@@ -43,38 +43,38 @@ body {
   background: conic-gradient(
     from var(--aurora-angle),
     #262628 0deg,
-    #3b6e8f 60deg,
-    #5e4a8a 120deg,
-    #2d8a6e 180deg,
-    #3b6e8f 240deg,
-    #262628 300deg,
+    #262628 140deg,
+    #3b6e8f 160deg,
+    #5e4a8a 180deg,
+    #2d8a6e 200deg,
+    #262628 220deg,
     #262628 360deg
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
-  animation: aurora-rotate 4s linear infinite;
-  opacity: 0.8;
+  animation: aurora-rotate 3s linear infinite;
+  opacity: 0.9;
 }
 
 .aurora-border::after {
   content: "";
   position: absolute;
-  inset: -3px;
+  inset: -4px;
   border-radius: inherit;
   background: conic-gradient(
     from var(--aurora-angle),
     transparent 0deg,
-    rgba(59, 110, 143, 0.15) 60deg,
-    rgba(94, 74, 138, 0.15) 120deg,
-    rgba(45, 138, 110, 0.15) 180deg,
-    rgba(59, 110, 143, 0.15) 240deg,
-    transparent 300deg,
+    transparent 145deg,
+    rgba(59, 110, 143, 0.2) 165deg,
+    rgba(94, 74, 138, 0.2) 180deg,
+    rgba(45, 138, 110, 0.2) 195deg,
+    transparent 215deg,
     transparent 360deg
   );
-  filter: blur(4px);
-  animation: aurora-rotate 4s linear infinite;
+  filter: blur(5px);
+  animation: aurora-rotate 3s linear infinite;
   z-index: -1;
 }
 
