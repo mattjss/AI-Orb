@@ -21,6 +21,25 @@
   }
 }
 
+@keyframes aurora-flare {
+  0% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  33% {
+    opacity: 0.7;
+    transform: scale(1.02);
+  }
+  66% {
+    opacity: 0.45;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -59,22 +78,28 @@ body {
 .aurora-border::after {
   content: "";
   position: absolute;
-  inset: -5px;
+  inset: -8px;
   border-radius: inherit;
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(59, 110, 143, 0.25) 20%,
-    rgba(94, 74, 138, 0.25) 35%,
-    rgba(45, 138, 110, 0.25) 50%,
-    rgba(59, 110, 143, 0.25) 65%,
-    rgba(94, 74, 138, 0.25) 80%,
+    rgba(59, 110, 143, 0.3) 20%,
+    rgba(94, 74, 138, 0.3) 35%,
+    rgba(45, 138, 110, 0.3) 50%,
+    rgba(59, 110, 143, 0.3) 65%,
+    rgba(94, 74, 138, 0.3) 80%,
     transparent 100%
   );
   background-size: 300% 100%;
-  filter: blur(6px);
-  animation: aurora-flow 6s ease-in-out infinite;
+  filter: blur(10px) url(#aurora-fbm);
+  animation: aurora-flow 6s ease-in-out infinite, aurora-flare 4s ease-in-out infinite;
   pointer-events: none;
+}
+
+/* Drop shadow behind the entire UI */
+.aurora-shadow {
+  filter: drop-shadow(0 4px 20px rgba(59, 110, 143, 0.15))
+          drop-shadow(0 2px 8px rgba(94, 74, 138, 0.1));
 }
 
 /* Orb frame: keep circle shape and border visible */

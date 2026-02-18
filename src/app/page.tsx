@@ -56,8 +56,29 @@ export default function Home() {
           flexShrink: 0,
         }}
       >
+        {/* SVG filter for fBm turbulence on the aurora glow */}
+        <svg width="0" height="0" style={{ position: "absolute" }}>
+          <defs>
+            <filter id="aurora-fbm">
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.03"
+                numOctaves="3"
+                seed="2"
+                result="noise"
+              />
+              <feDisplacementMap
+                in="SourceGraphic"
+                in2="noise"
+                scale="6"
+                xChannelSelector="R"
+                yChannelSelector="G"
+              />
+            </filter>
+          </defs>
+        </svg>
         <div
-          className="aurora-border"
+          className="aurora-border aurora-shadow"
           style={{
             width: 410,
             minWidth: 410,
