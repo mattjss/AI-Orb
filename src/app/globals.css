@@ -37,17 +37,18 @@ body {
 .aurora-border::before {
   content: "";
   position: absolute;
-  inset: -2px;
+  inset: -1px;
   border-radius: inherit;
-  padding: 2px;
+  padding: 1px;
   background: conic-gradient(
     from var(--aurora-angle),
     transparent 0deg,
-    transparent 140deg,
-    #3b6e8f 160deg,
-    #5e4a8a 180deg,
-    #2d8a6e 200deg,
-    transparent 220deg,
+    transparent 160deg,
+    #3b6e8f 170deg,
+    #5e9abf 177deg,
+    #7b5fad 183deg,
+    #2d8a6e 190deg,
+    transparent 200deg,
     transparent 360deg
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -61,19 +62,19 @@ body {
 .aurora-border::after {
   content: "";
   position: absolute;
-  inset: -6px;
+  inset: -5px;
   border-radius: inherit;
   background: conic-gradient(
     from var(--aurora-angle),
     transparent 0deg,
-    transparent 140deg,
-    rgba(59, 110, 143, 0.35) 160deg,
-    rgba(94, 74, 138, 0.35) 180deg,
-    rgba(45, 138, 110, 0.35) 195deg,
-    transparent 220deg,
+    transparent 162deg,
+    rgba(59, 110, 143, 0.3) 172deg,
+    rgba(94, 74, 138, 0.3) 180deg,
+    rgba(45, 138, 110, 0.3) 188deg,
+    transparent 198deg,
     transparent 360deg
   );
-  filter: blur(8px);
+  filter: blur(6px);
   animation: aurora-rotate 3s linear infinite;
   pointer-events: none;
 }
