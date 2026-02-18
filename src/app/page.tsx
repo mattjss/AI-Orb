@@ -56,7 +56,29 @@ export default function Home() {
           flexShrink: 0,
         }}
       >
+        {/* SVG filter for fBm turbulence on the aurora glow */}
+        <svg width="0" height="0" style={{ position: "absolute" }}>
+          <defs>
+            <filter id="aurora-fbm">
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.03"
+                numOctaves="3"
+                seed="2"
+                result="noise"
+              />
+              <feDisplacementMap
+                in="SourceGraphic"
+                in2="noise"
+                scale="6"
+                xChannelSelector="R"
+                yChannelSelector="G"
+              />
+            </filter>
+          </defs>
+        </svg>
         <div
+          className="aurora-border aurora-shadow"
           style={{
             width: 410,
             minWidth: 410,
@@ -71,10 +93,12 @@ export default function Home() {
             paddingTop: 8,
             paddingBottom: 8,
             overflow: "visible",
+            zIndex: 0,
           }}
         >
           {/* Orb frame: outer border ring */}
           <div
+            className="aurora-border"
             style={{
               width: 36,
               height: 36,
@@ -86,6 +110,7 @@ export default function Home() {
               border: "1px solid #262628",
               background: "#131314",
               boxSizing: "border-box",
+              zIndex: 0,
             }}
           >
             {/* Inner mask: clips the orb so fuzzy edges hide behind the border */}
