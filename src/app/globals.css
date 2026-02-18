@@ -19,7 +19,18 @@ body {
   contain: layout style;
 }
 
-/* Unicorn injects into .orb-embed; we only scale the div, no overrides on canvas */
+/* Force Unicorn Studio canvas to fill and center inside the orb circle */
+[data-us-project] canvas,
+[data-us-project] > div,
+[data-us-project] > div > div,
+[data-us-project] > div > canvas {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  object-fit: cover !important;
+}
 
 /* Circular clip: border-radius + overflow so orb is a circle; border sits outside on .orb-frame */
 .orb-mask {

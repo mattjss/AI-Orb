@@ -4,10 +4,8 @@ import { useEffect } from "react";
 
 export default function Home() {
   useEffect(() => {
-    console.log("[v0] Initializing Unicorn Studio embed");
     const u = (window as any).UnicornStudio;
     if (u && u.init) {
-      console.log("[v0] UnicornStudio already loaded, calling init()");
       u.init();
     } else {
       (window as any).UnicornStudio = { isInitialized: false };
@@ -15,11 +13,7 @@ export default function Home() {
       i.src =
         "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.0.5/dist/unicornStudio.umd.js";
       i.onload = function () {
-        console.log("[v0] UnicornStudio script loaded, calling init()");
         (window as any).UnicornStudio.init();
-      };
-      i.onerror = function (err) {
-        console.log("[v0] UnicornStudio script failed to load", err);
       };
       (document.head || document.body).appendChild(i);
     }
