@@ -99,6 +99,7 @@ export default function Home() {
                 inset: 1,
                 borderRadius: "50%",
                 overflow: "hidden",
+                zIndex: 1,
               }}
             >
               {/* Orb embed: 58x58 centered inside the 36x36 frame, clipped by the inner mask */}
@@ -117,6 +118,8 @@ export default function Home() {
           </div>
           <span
             style={{
+              position: "relative",
+              zIndex: 1,
               marginLeft: 8,
               flexShrink: 0,
               whiteSpace: "nowrap",
