@@ -4,14 +4,23 @@ import { useEffect } from "react";
 
 export default function Home() {
   useEffect(() => {
-    // Only load the script once
-    if (document.querySelector('script[data-us-script]')) return;
+    // Prevent duplicate initialization
+    if ((window as any).__usLoaded) {
+      try {
+        const u = (window as any).UnicornStudio;
+        if (u && u.init) u.init();
+      } catch (_) {}
+      return;
+    }
 
     const u = (window as any).UnicornStudio;
     if (u && u.init) {
-      u.init();
+      (window as any).__usLoaded = true;
+      try { u.init(); } catch (_) {}
       return;
     }
+
+    if (document.querySelector('script[data-us-script]')) return;
 
     (window as any).UnicornStudio = { isInitialized: false };
     const script = document.createElement("script");
@@ -19,7 +28,8 @@ export default function Home() {
       "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.0.5/dist/unicornStudio.umd.js";
     script.setAttribute("data-us-script", "true");
     script.onload = function () {
-      (window as any).UnicornStudio.init();
+      (window as any).__usLoaded = true;
+      try { (window as any).UnicornStudio.init(); } catch (_) {}
     };
     (document.head || document.body).appendChild(script);
   }, []);
