@@ -1,10 +1,8 @@
 "use client";
 
-const UNICORN_EMBED_URL = "https://www.unicorn.studio/embed/1pR6h5M1hBZZGegkYa8W";
-
 export default function Home() {
   return (
-    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#111" }}>
+    <div style={{ minHeight: "100vh", minWidth: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#111", overflow: "visible" }}>
       <div
         style={{
           width: 1000,
@@ -15,11 +13,14 @@ export default function Home() {
           justifyContent: "center",
           transform: "scale(1.25)",
           transformOrigin: "center center",
+          overflow: "visible",
+          flexShrink: 0,
         }}
       >
         <div
           style={{
             width: 410,
+            minWidth: 410,
             height: 52,
             borderRadius: 26,
             background: "#0A0A0B",
@@ -30,9 +31,12 @@ export default function Home() {
             paddingRight: 8,
             paddingTop: 8,
             paddingBottom: 8,
+            overflow: "visible",
           }}
         >
+          {/* Circle with border mask only */}
           <div
+            className="orb-frame"
             style={{
               width: 36,
               height: 36,
@@ -40,31 +44,32 @@ export default function Home() {
               minHeight: 36,
               flexShrink: 0,
               position: "relative",
-              background: "#0A0A0B",
               borderRadius: "50%",
+              border: "1px solid #252527",
+              background: "#0A0A0B",
+              boxSizing: "border-box",
+              overflow: "hidden",
             }}
           >
-            {/* Orb inset 2px so outer ring is solid #0A0A0B — covers fuzzy iframe edge */}
             <div
               className="orb-mask"
               style={{
                 position: "absolute",
-                left: 2,
-                top: 2,
-                width: 32,
-                height: 32,
+                left: 1,
+                top: 1,
+                width: 34,
+                height: 34,
+                borderRadius: "50%",
+                overflow: "hidden",
+                background: "#0A0A0B",
               }}
-            >
-              <iframe
-                src={UNICORN_EMBED_URL}
-                title="AI orb"
-                style={{ position: "absolute", left: 0, top: 0, width: 32, height: 32, border: "none" }}
-              />
-            </div>
+            />
           </div>
           <span
             style={{
               marginLeft: 8,
+              flexShrink: 0,
+              whiteSpace: "nowrap",
               fontFamily: "ui-monospace, monospace",
               fontSize: 14,
               letterSpacing: "0.01em",

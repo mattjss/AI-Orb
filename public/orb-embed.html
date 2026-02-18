@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Orb embed</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      overflow: hidden;
+      background: #0A0A0B;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .orb-wrap {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+      background: #1a1a2e;
+    }
+    .orb-wrap [data-us-project] {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 1440px;
+      height: 900px;
+      margin-left: -720px;
+      margin-top: -450px;
+      transform: translate(-50%, -50%) scale(0.04);
+      transform-origin: center center;
+    }
+    .fallback {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, #2a2a4e 0%, #1a1a2e 70%);
+      border-radius: 50%;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.0.5/dist/unicornStudio.umd.js"></script>
+</head>
+<body>
+  <div class="orb-wrap">
+    <div class="fallback"></div>
+    <div data-us-project="1pR6h5M1hBZZGegkYa8W" style="width:1440px; height:900px"></div>
+  </div>
+  <script type="text/javascript">
+  (function(){
+    function init() {
+      if (window.UnicornStudio && window.UnicornStudio.init) {
+        window.UnicornStudio.init();
+      }
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
+  })();
+  </script>
+</body>
+</html>
