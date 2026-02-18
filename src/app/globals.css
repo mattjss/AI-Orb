@@ -53,18 +53,18 @@ body {
 .aurora-border::before {
   content: "";
   position: absolute;
-  inset: -1px;
+  inset: -3px;
   border-radius: inherit;
-  padding: 1px;
+  padding: 3px;
   background: linear-gradient(
     90deg,
-    #262628 0%,
+    transparent 0%,
     #3b6e8f 20%,
     #5e4a8a 35%,
     #2d8a6e 50%,
     #3b6e8f 65%,
     #5e4a8a 80%,
-    #262628 100%
+    transparent 100%
   );
   background-size: 300% 100%;
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -73,6 +73,7 @@ body {
   mask-composite: exclude;
   animation: aurora-flow 6s ease-in-out infinite;
   pointer-events: none;
+  z-index: -1;
 }
 
 .aurora-border::after {
@@ -94,6 +95,7 @@ body {
   filter: blur(10px) url(#aurora-fbm);
   animation: aurora-flow 6s ease-in-out infinite, aurora-flare 4s ease-in-out infinite;
   pointer-events: none;
+  z-index: -1;
 }
 
 /* Drop shadow behind the entire UI */
