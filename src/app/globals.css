@@ -73,6 +73,7 @@ body {
   mask-composite: exclude;
   animation: aurora-flow 6s ease-in-out infinite;
   pointer-events: none;
+  z-index: -1;
 }
 
 .aurora-border::after {
@@ -94,6 +95,7 @@ body {
   filter: blur(10px) url(#aurora-fbm);
   animation: aurora-flow 6s ease-in-out infinite, aurora-flare 4s ease-in-out infinite;
   pointer-events: none;
+  z-index: -1;
 }
 
 /* Drop shadow behind the entire UI */
