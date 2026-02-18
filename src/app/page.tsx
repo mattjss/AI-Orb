@@ -72,9 +72,11 @@ export default function Home() {
               data-us-project="z71YPGJALoAcv8R1HEZD"
               style={{
                 position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
+                top: "50%",
+                left: "50%",
+                width: "160%",
+                height: "160%",
+                transform: "translate(-50%, -50%)",
               }}
             ></div>
           </div>
