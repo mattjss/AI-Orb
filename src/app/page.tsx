@@ -37,18 +37,24 @@ export default function Home() {
   }, []);
 
   return (
-    <div style={{ minHeight: "100vh", minWidth: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#111", overflow: "visible" }}>
+    <div
+      style={{
+        minHeight: "100vh",
+        minWidth: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "#000000",
+      }}
+    >
       <div
         style={{
           width: 1000,
           height: 1000,
-          background: "#000",
+          background: "#000000",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          transform: "scale(1.25)",
-          transformOrigin: "center center",
-          overflow: "visible",
           flexShrink: 0,
         }}
       >
