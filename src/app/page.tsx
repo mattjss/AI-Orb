@@ -4,36 +4,24 @@ import { useEffect } from "react";
 
 export default function Home() {
   useEffect(() => {
-    const initUnicorn = () => {
-      const us = (window as any).UnicornStudio;
-      if (us && us.destroy) {
-        us.destroy();
-      }
-      if (us && us.init) {
-        us.init();
-      }
-    };
+    // Only load the script once
+    if (document.querySelector('script[data-us-script]')) return;
 
     const u = (window as any).UnicornStudio;
     if (u && u.init) {
-      initUnicorn();
-    } else {
-      (window as any).UnicornStudio = { isInitialized: false };
-      const i = document.createElement("script");
-      i.src =
-        "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.0.5/dist/unicornStudio.umd.js";
-      i.onload = function () {
-        (window as any).UnicornStudio.init();
-      };
-      (document.head || document.body).appendChild(i);
+      u.init();
+      return;
     }
 
-    return () => {
-      const us = (window as any).UnicornStudio;
-      if (us && us.destroy) {
-        us.destroy();
-      }
+    (window as any).UnicornStudio = { isInitialized: false };
+    const script = document.createElement("script");
+    script.src =
+      "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.0.5/dist/unicornStudio.umd.js";
+    script.setAttribute("data-us-script", "true");
+    script.onload = function () {
+      (window as any).UnicornStudio.init();
     };
+    (document.head || document.body).appendChild(script);
   }, []);
 
   return (
