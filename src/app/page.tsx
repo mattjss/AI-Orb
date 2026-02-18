@@ -4,9 +4,19 @@ import { useEffect } from "react";
 
 export default function Home() {
   useEffect(() => {
+    const initUnicorn = () => {
+      const us = (window as any).UnicornStudio;
+      if (us && us.destroy) {
+        us.destroy();
+      }
+      if (us && us.init) {
+        us.init();
+      }
+    };
+
     const u = (window as any).UnicornStudio;
     if (u && u.init) {
-      u.init();
+      initUnicorn();
     } else {
       (window as any).UnicornStudio = { isInitialized: false };
       const i = document.createElement("script");
@@ -17,6 +27,13 @@ export default function Home() {
       };
       (document.head || document.body).appendChild(i);
     }
+
+    return () => {
+      const us = (window as any).UnicornStudio;
+      if (us && us.destroy) {
+        us.destroy();
+      }
+    };
   }, []);
 
   return (
