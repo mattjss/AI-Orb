@@ -58,7 +58,7 @@ body {
   -webkit-mask-composite: xor;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
-  animation: metal-rotate 8s linear infinite;
+  animation: metal-rotate 5s linear infinite;
   pointer-events: none;
 }
 
