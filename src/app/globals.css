@@ -9,9 +9,73 @@
   }
 }
 
+@keyframes aurora-rotate {
+  0% {
+    --aurora-angle: 0deg;
+  }
+  100% {
+    --aurora-angle: 360deg;
+  }
+}
+
+@property --aurora-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
+}
+
+/* Aurora glow border effect for pill and orb frame */
+.aurora-border {
+  position: relative;
+}
+
+.aurora-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--aurora-angle),
+    #262628 0deg,
+    #3b6e8f 60deg,
+    #5e4a8a 120deg,
+    #2d8a6e 180deg,
+    #3b6e8f 240deg,
+    #262628 300deg,
+    #262628 360deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: aurora-rotate 4s linear infinite;
+  opacity: 0.8;
+}
+
+.aurora-border::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--aurora-angle),
+    transparent 0deg,
+    rgba(59, 110, 143, 0.15) 60deg,
+    rgba(94, 74, 138, 0.15) 120deg,
+    rgba(45, 138, 110, 0.15) 180deg,
+    rgba(59, 110, 143, 0.15) 240deg,
+    transparent 300deg,
+    transparent 360deg
+  );
+  filter: blur(4px);
+  animation: aurora-rotate 4s linear infinite;
+  z-index: -1;
 }
 
 /* Orb frame: keep circle shape and border visible */

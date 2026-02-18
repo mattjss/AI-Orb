@@ -59,6 +59,7 @@ export default function Home() {
         }}
       >
         <div
+          className="aurora-border"
           style={{
             width: 410,
             minWidth: 410,
@@ -73,10 +74,12 @@ export default function Home() {
             paddingTop: 8,
             paddingBottom: 8,
             overflow: "visible",
+            zIndex: 0,
           }}
         >
           {/* Orb frame: outer border ring */}
           <div
+            className="aurora-border"
             style={{
               width: 36,
               height: 36,
@@ -88,6 +91,7 @@ export default function Home() {
               border: "1px solid #262628",
               background: "#131314",
               boxSizing: "border-box",
+              zIndex: 0,
             }}
           >
             {/* Inner mask: clips the orb so fuzzy edges hide behind the border */}
