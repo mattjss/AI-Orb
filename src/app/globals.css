@@ -9,19 +9,16 @@
   }
 }
 
-@keyframes aurora-rotate {
+@keyframes aurora-flow {
   0% {
-    --aurora-angle: 0deg;
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
   }
   100% {
-    --aurora-angle: 360deg;
+    background-position: 0% 50%;
   }
-}
-
-@property --aurora-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
 }
 
 body {
@@ -40,22 +37,22 @@ body {
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: conic-gradient(
-    from var(--aurora-angle),
-    transparent 0deg,
-    transparent 160deg,
-    #3b6e8f 170deg,
-    #5e9abf 177deg,
-    #7b5fad 183deg,
-    #2d8a6e 190deg,
-    transparent 200deg,
-    transparent 360deg
+  background: linear-gradient(
+    90deg,
+    #262628 0%,
+    #3b6e8f 20%,
+    #5e4a8a 35%,
+    #2d8a6e 50%,
+    #3b6e8f 65%,
+    #5e4a8a 80%,
+    #262628 100%
   );
+  background-size: 300% 100%;
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
-  animation: aurora-rotate 3s linear infinite;
+  animation: aurora-flow 6s ease-in-out infinite;
   pointer-events: none;
 }
 
@@ -64,18 +61,19 @@ body {
   position: absolute;
   inset: -5px;
   border-radius: inherit;
-  background: conic-gradient(
-    from var(--aurora-angle),
-    transparent 0deg,
-    transparent 162deg,
-    rgba(59, 110, 143, 0.3) 172deg,
-    rgba(94, 74, 138, 0.3) 180deg,
-    rgba(45, 138, 110, 0.3) 188deg,
-    transparent 198deg,
-    transparent 360deg
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(59, 110, 143, 0.25) 20%,
+    rgba(94, 74, 138, 0.25) 35%,
+    rgba(45, 138, 110, 0.25) 50%,
+    rgba(59, 110, 143, 0.25) 65%,
+    rgba(94, 74, 138, 0.25) 80%,
+    transparent 100%
   );
+  background-size: 300% 100%;
   filter: blur(6px);
-  animation: aurora-rotate 3s linear infinite;
+  animation: aurora-flow 6s ease-in-out infinite;
   pointer-events: none;
 }
 
