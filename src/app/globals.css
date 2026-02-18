@@ -19,8 +19,7 @@ body {
   contain: layout style;
 }
 
-/* Force Unicorn Studio canvas and wrappers to fill the oversized embed container */
-[data-us-project],
+/* Force Unicorn Studio's internal elements to fill the embed container */
 [data-us-project] canvas,
 [data-us-project] > div,
 [data-us-project] > div > div,
