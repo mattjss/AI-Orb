@@ -57,17 +57,17 @@ body {
   padding: 1px;
   background: conic-gradient(
     from var(--metal-angle),
-    #111113 0deg,
-    #1a1a1c 30deg,
-    #111113 80deg,
-    #353538 140deg,
-    #50505a 160deg,
-    #6a6a75 180deg,
-    #50505a 200deg,
-    #353538 220deg,
-    #111113 280deg,
-    #1a1a1c 330deg,
-    #111113 360deg
+    #0e0e10 0deg,
+    #141416 30deg,
+    #0e0e10 80deg,
+    #262629 140deg,
+    #38383e 160deg,
+    #484850 180deg,
+    #38383e 200deg,
+    #262629 220deg,
+    #0e0e10 280deg,
+    #141416 330deg,
+    #0e0e10 360deg
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
@@ -86,9 +86,9 @@ body {
     90deg,
     transparent 0%,
     transparent 30%,
-    rgba(200,200,210,0.04) 40%,
-    rgba(200,200,210,0.1) 50%,
-    rgba(200,200,210,0.04) 60%,
+    rgba(180,180,190,0.03) 40%,
+    rgba(180,180,190,0.06) 50%,
+    rgba(180,180,190,0.03) 60%,
     transparent 70%,
     transparent 100%
   );
