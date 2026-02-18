@@ -9,12 +9,18 @@
   }
 }
 
-@keyframes metal-load {
+@property --metal-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes metal-rotate {
   0% {
-    background-position: 200% center;
+    --metal-angle: 0deg;
   }
   100% {
-    background-position: -200% center;
+    --metal-angle: 360deg;
   }
 }
 
@@ -23,7 +29,7 @@ body {
   min-height: 100vh;
 }
 
-/* Metal shader loading border effect for pill and orb frame */
+/* Metal shader border effect that sweeps around the edges */
 .metal-border {
   position: relative;
 }
@@ -34,28 +40,25 @@ body {
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(
-    90deg,
-    #1a1a1c 0%,
-    #262628 15%,
-    #1a1a1c 25%,
-    #262628 35%,
-    #4a4a4e 45%,
-    #6a6a6e 48%,
-    #8a8a8f 50%,
-    #6a6a6e 52%,
-    #4a4a4e 55%,
-    #262628 65%,
-    #1a1a1c 75%,
-    #262628 85%,
-    #1a1a1c 100%
+  background: conic-gradient(
+    from var(--metal-angle),
+    #1a1a1c 0deg,
+    #262628 30deg,
+    #1a1a1c 80deg,
+    #4a4a4e 140deg,
+    #6a6a6e 160deg,
+    #8a8a8f 180deg,
+    #6a6a6e 200deg,
+    #4a4a4e 220deg,
+    #1a1a1c 280deg,
+    #262628 330deg,
+    #1a1a1c 360deg
   );
-  background-size: 300% 100%;
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
-  animation: metal-load 2.5s ease-in-out infinite;
+  animation: metal-rotate 3s linear infinite;
   pointer-events: none;
 }
 
