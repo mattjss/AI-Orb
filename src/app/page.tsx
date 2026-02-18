@@ -76,15 +76,15 @@ export default function Home() {
                 overflow: "hidden",
               }}
             >
-              {/* Orb embed: 54x54 centered inside the 36x36 frame, clipped by the inner mask */}
+              {/* Orb embed: 56x56 centered inside the 36x36 frame, clipped by the inner mask */}
               <div
                 data-us-project="z71YPGJALoAcv8R1HEZD"
                 style={{
                   position: "absolute",
                   top: "50%",
                   left: "50%",
-                  width: 54,
-                  height: 54,
+                  width: 56,
+                  height: 56,
                   transform: "translate(-50%, -50%)",
                 }}
               ></div>
