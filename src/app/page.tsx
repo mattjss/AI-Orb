@@ -57,7 +57,7 @@ export default function Home() {
         }}
       >
         <div
-          className="aurora-border"
+          className="metal-border"
           style={{
             width: 410,
             minWidth: 410,
@@ -77,7 +77,7 @@ export default function Home() {
         >
           {/* Orb frame: outer border ring */}
           <div
-            className="aurora-border"
+            className="metal-border"
             style={{
               width: 36,
               height: 36,
