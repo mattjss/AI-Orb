@@ -1,6 +1,24 @@
 "use client";
 
+import { useEffect } from "react";
+
 export default function Home() {
+  useEffect(() => {
+    const u = (window as any).UnicornStudio;
+    if (u && u.init) {
+      u.init();
+    } else {
+      (window as any).UnicornStudio = { isInitialized: false };
+      const i = document.createElement("script");
+      i.src =
+        "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.0.5/dist/unicornStudio.umd.js";
+      i.onload = function () {
+        (window as any).UnicornStudio.init();
+      };
+      (document.head || document.body).appendChild(i);
+    }
+  }, []);
+
   return (
     <div style={{ minHeight: "100vh", minWidth: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#111", overflow: "visible" }}>
       <div
@@ -34,9 +52,8 @@ export default function Home() {
             overflow: "visible",
           }}
         >
-          {/* Circle with border mask only */}
+          {/* Unicorn Studio AI Orb */}
           <div
-            className="orb-frame"
             style={{
               width: 36,
               height: 36,
@@ -52,16 +69,15 @@ export default function Home() {
             }}
           >
             <div
-              className="orb-mask"
+              data-us-project="z71YPGJALoAcv8R1HEZD"
               style={{
                 position: "absolute",
-                left: 1,
-                top: 1,
-                width: 34,
-                height: 34,
-                borderRadius: "50%",
-                overflow: "hidden",
-                background: "#0A0A0B",
+                top: "50%",
+                left: "50%",
+                width: 1440,
+                height: 900,
+                transform: "translate(-50%, -50%) scale(0.035)",
+                transformOrigin: "center center",
               }}
             />
           </div>
