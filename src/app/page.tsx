@@ -76,15 +76,15 @@ export default function Home() {
                 overflow: "hidden",
               }}
             >
-              {/* Orb embed: heavily oversized so Unicorn Studio's black border is pushed outside the mask */}
+              {/* Orb embed: 48x48 centered inside the 36x36 frame, clipped by the inner mask */}
               <div
                 data-us-project="z71YPGJALoAcv8R1HEZD"
                 style={{
                   position: "absolute",
                   top: "50%",
                   left: "50%",
-                  width: "350%",
-                  height: "350%",
+                  width: 48,
+                  height: 48,
                   transform: "translate(-50%, -50%)",
                 }}
               ></div>
