@@ -39,16 +39,28 @@ export default function Home() {
               minWidth: 36,
               minHeight: 36,
               flexShrink: 0,
-              borderRadius: "50%",
-              overflow: "hidden",
               position: "relative",
+              background: "#0A0A0B",
+              borderRadius: "50%",
             }}
           >
-            <iframe
-              src={UNICORN_EMBED_URL}
-              title="AI orb"
-              style={{ position: "absolute", left: 0, top: 0, width: 36, height: 36, border: "none" }}
-            />
+            {/* Orb inset 2px so outer ring is solid #0A0A0B — covers fuzzy iframe edge */}
+            <div
+              className="orb-mask"
+              style={{
+                position: "absolute",
+                left: 2,
+                top: 2,
+                width: 32,
+                height: 32,
+              }}
+            >
+              <iframe
+                src={UNICORN_EMBED_URL}
+                title="AI orb"
+                style={{ position: "absolute", left: 0, top: 0, width: 32, height: 32, border: "none" }}
+              />
+            </div>
           </div>
           <span
             style={{
