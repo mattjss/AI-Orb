@@ -2,39 +2,33 @@
 
 export default function Home() {
   return (
-    <div style={{ minHeight: "100vh", minWidth: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#111", overflow: "visible" }}>
-      <div
-        style={{
-          width: 1000,
-          height: 1000,
-          background: "#000",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          transform: "scale(1.25)",
-          transformOrigin: "center center",
-          overflow: "visible",
-          flexShrink: 0,
-        }}
-      >
+    <div style={{
+      width: "100vw", height: "100vh",
+      background: "#101010",
+      display: "flex", alignItems: "center", justifyContent: "center",
+    }}>
+      <div style={{
+        width: 422, height: 422,
+        background: "#101010",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        flexShrink: 0,
+        overflow: "hidden",
+      }}>
         <div
           style={{
-            width: 410,
-            minWidth: 410,
+            width: 358,
             height: 52,
             borderRadius: 26,
             background: "#0A0A0B",
-            border: "1px solid #161617",
+            border: "1px solid #1e1e20",
             display: "flex",
             alignItems: "center",
             paddingLeft: 8,
             paddingRight: 8,
             paddingTop: 8,
             paddingBottom: 8,
-            overflow: "visible",
           }}
         >
-          {/* Circle with border mask only */}
           <div
             className="orb-frame"
             style={{
