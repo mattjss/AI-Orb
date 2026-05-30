@@ -19,23 +19,25 @@ body { margin: 0; min-height: 100vh; }
   to   { --angle: 360deg; }
 }
 
+/* bar sheen: long pause, quick single pass */
 @keyframes bar-shimmer {
-  0%, 40%   { background-position: 200% center; }
-  75%, 100% { background-position: -200% center; }
+  0%, 55%  { transform: translateX(-100%); }
+  80%, 100% { transform: translateX(100%); }
 }
 
+/* text glint: periodic metallic catch */
 @keyframes text-shimmer {
-  0%, 35%   { background-position: 200% center; }
-  80%, 100% { background-position: -200% center; }
+  0%, 40%   { background-position: 200% center; }
+  72%, 100% { background-position: -200% center; }
 }
 
-/* ─── orb circle mask (SVG mask = crisp edges, hides iframe fuzz) ─ */
+/* ─── orb SVG circle mask ─────────────────────────────────── */
 .orb-mask {
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='white'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Ccircle cx='17' cy='17' r='17' fill='white'/%3E%3C/svg%3E");
   mask-size: 100% 100%;
   mask-repeat: no-repeat;
   mask-position: center;
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='white'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Ccircle cx='17' cy='17' r='17' fill='white'/%3E%3C/svg%3E");
   -webkit-mask-size: 100% 100%;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
@@ -48,74 +50,76 @@ body { margin: 0; min-height: 100vh; }
   position: relative;
   display: inline-flex;
   padding: 1px;
-  border-radius: 26px;
+  border-radius: 24px;
+  /* faint ambient glow so the pill feels lit from within */
+  filter: drop-shadow(0 0 8px rgba(200, 200, 210, 0.06));
 }
 
+/* comet — tight bright peak, rapid trailing fade, slow 5s orbit */
 .pill-border {
   position: absolute;
   inset: 0;
-  border-radius: 26px;
+  border-radius: 24px;
   background: conic-gradient(
     from var(--angle),
-    transparent 0deg,
-    rgba(90, 90, 95, 0.15) 25deg,
-    rgba(180, 180, 188, 0.55) 55deg,
-    rgba(240, 240, 245, 0.9) 70deg,
-    rgba(180, 180, 188, 0.55) 85deg,
-    rgba(90, 90, 95, 0.15) 115deg,
-    transparent 155deg
+    rgba(255, 255, 255, 0.85) 0deg,
+    rgba(210, 212, 220, 0.42) 10deg,
+    rgba(140, 142, 150, 0.15) 24deg,
+    transparent 44deg,
+    transparent 360deg
   );
-  animation: spin-border 4s linear infinite;
+  animation: spin-border 5s linear infinite;
 }
 
 .pill-inner {
   position: relative;
-  width: 280px;
-  height: 50px;
-  border-radius: 25px;
-  background: linear-gradient(90deg, #0e0e10 0%, #0a0a0b 100%);
+  width: 272px;
+  height: 44px;
+  border-radius: 23px;
+  background: linear-gradient(135deg, #111113 0%, #0a0a0c 100%);
   display: flex;
   align-items: center;
-  padding: 0 12px 0 7px;
-  gap: 8px;
+  padding: 0 14px 0 5px;
+  gap: 9px;
   overflow: hidden;
   z-index: 1;
 }
 
+/* sheen: a narrow gloss that slides through the pill body */
 .pill-shimmer {
   position: absolute;
-  inset: 0;
-  border-radius: 25px;
+  top: 0; bottom: 0;
+  left: 0;
+  width: 45%;
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.03) 40%,
-    rgba(255, 255, 255, 0.08) 50%,
-    rgba(255, 255, 255, 0.03) 60%,
+    rgba(255, 255, 255, 0.035) 50%,
     transparent 100%
   );
-  background-size: 300% 100%;
-  animation: bar-shimmer 7s ease-in-out infinite;
+  animation: bar-shimmer 8s ease-in-out infinite;
   pointer-events: none;
+  will-change: transform;
 }
 
+/* metallic text: dark base, periodic silver-white glint */
 .shimmer-text {
   white-space: nowrap;
   font-family: ui-monospace, monospace;
-  font-size: 13px;
-  letter-spacing: 0.03em;
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
   color: transparent;
   background: linear-gradient(
     90deg,
-    rgba(79, 79, 79, 0.5) 0%,
-    rgba(79, 79, 79, 0.5) 35%,
-    rgba(180, 190, 200, 1) 50%,
-    rgba(79, 79, 79, 0.5) 65%,
-    rgba(79, 79, 79, 0.5) 100%
+    rgba(88, 88, 96, 0.65) 0%,
+    rgba(88, 88, 96, 0.65) 30%,
+    rgba(215, 218, 228, 1) 50%,
+    rgba(88, 88, 96, 0.65) 70%,
+    rgba(88, 88, 96, 0.65) 100%
   );
-  background-size: 200% 100%;
+  background-size: 220% 100%;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: text-shimmer 6s linear infinite;
+  animation: text-shimmer 6s ease-in-out infinite;
 }

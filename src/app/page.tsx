@@ -16,17 +16,15 @@ export default function Home() {
         flexShrink: 0,
       }}>
         <div className="pill-outer">
-          {/* rotating border trail */}
           <div className="pill-border" />
 
           <div className="pill-inner">
-            {/* full-bar shimmer sweep */}
             <div className="pill-shimmer" />
 
-            {/* orb — iframe overscaled 120% so no black letterbox at edges */}
+            {/* orb — 34px circle, iframe 150% to fill with no black edge */}
             <div className="orb-mask" style={{
-              width: 38, height: 38,
-              minWidth: 38, flexShrink: 0,
+              width: 34, height: 34,
+              minWidth: 34, flexShrink: 0,
               position: "relative",
               overflow: "hidden",
             }}>
@@ -42,7 +40,6 @@ export default function Home() {
               />
             </div>
 
-            {/* shimmer text */}
             <span className="shimmer-text">Agent thinking...</span>
           </div>
         </div>
