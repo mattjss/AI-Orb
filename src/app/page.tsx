@@ -21,8 +21,24 @@ export default function Home() {
             {/* full-bar shimmer sweep */}
             <div className="pill-shimmer" />
 
-            {/* css glowing orb */}
-            <div className="orb-circle" />
+            {/* unicorn studio orb — rendered at 200px, scaled to 40px so WebGL has room */}
+            <div style={{
+              width: 40, height: 40,
+              minWidth: 40, flexShrink: 0,
+              borderRadius: "50%",
+              overflow: "hidden",
+              transform: "translateZ(0)",
+            }}>
+              <div style={{ width: 200, height: 200, transform: "scale(0.2)", transformOrigin: "top left" }}>
+                <iframe
+                  src="unicorn-orb.html"
+                  width={200}
+                  height={200}
+                  style={{ display: "block", border: "none" }}
+                  scrolling="no"
+                />
+              </div>
+            </div>
 
             {/* shimmer text */}
             <span className="shimmer-text">Agent thinking...</span>
