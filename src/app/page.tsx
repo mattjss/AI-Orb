@@ -1,5 +1,7 @@
 "use client";
 
+const ORB_URL = "https://www.unicorn.studio/embed/1pR6h5M1hBZZGegkYa8W";
+
 export default function Home() {
   return (
     <div style={{
@@ -21,21 +23,19 @@ export default function Home() {
             {/* full-bar shimmer sweep */}
             <div className="pill-shimmer" />
 
-            {/* unicorn studio orb — rendered at 200px, scaled to 40px so WebGL has room */}
+            {/* orb — 36px container, 32px iframe inset 2px to hide fuzzy edge */}
             <div style={{
-              width: 40, height: 40,
-              minWidth: 40, flexShrink: 0,
+              width: 36, height: 36,
+              minWidth: 36, flexShrink: 0,
+              position: "relative",
+              background: "#0A0A0B",
               borderRadius: "50%",
-              overflow: "hidden",
-              transform: "translateZ(0)",
             }}>
-              <div style={{ width: 200, height: 200, transform: "scale(0.2)", transformOrigin: "top left" }}>
+              <div className="orb-mask" style={{ position: "absolute", left: 2, top: 2, width: 32, height: 32 }}>
                 <iframe
-                  src="unicorn-orb.html"
-                  width={200}
-                  height={200}
-                  style={{ display: "block", border: "none" }}
-                  scrolling="no"
+                  src={ORB_URL}
+                  title="AI orb"
+                  style={{ position: "absolute", left: 0, top: 0, width: "100%", height: "100%", border: "none" }}
                 />
               </div>
             </div>
