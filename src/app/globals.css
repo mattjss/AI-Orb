@@ -4,9 +4,97 @@
   *, *::before, *::after { border-width: 0; outline: none; }
 }
 
-@keyframes shimmer {
+body { margin: 0; min-height: 100vh; }
+
+/* ─── animated border angle property ─────────────────────── */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* ─── keyframes ───────────────────────────────────────────── */
+@keyframes spin-border {
+  from { --angle: 0deg; }
+  to   { --angle: 360deg; }
+}
+
+@keyframes full-shimmer {
   0%   { background-position: 200% center; }
   100% { background-position: -200% center; }
 }
 
-body { margin: 0; min-height: 100vh; }
+/* ─── pill ────────────────────────────────────────────────── */
+.pill-outer {
+  position: relative;
+  display: inline-flex;
+  padding: 1px;
+  border-radius: 26px;
+}
+
+.pill-border {
+  position: absolute;
+  inset: 0;
+  border-radius: 26px;
+  background: conic-gradient(
+    from var(--angle),
+    transparent 0deg,
+    rgba(60, 120, 255, 0.35) 40deg,
+    rgba(180, 215, 255, 0.85) 70deg,
+    rgba(60, 120, 255, 0.35) 100deg,
+    transparent 150deg
+  );
+  animation: spin-border 3s linear infinite;
+}
+
+.pill-inner {
+  position: relative;
+  width: 280px;
+  height: 50px;
+  border-radius: 25px;
+  background: linear-gradient(90deg, #1a1a1c 0%, #0d0d0f 100%);
+  display: flex;
+  align-items: center;
+  padding: 0 14px 0 5px;
+  gap: 10px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.pill-shimmer {
+  position: absolute;
+  inset: 0;
+  border-radius: 25px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 40%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.03) 60%,
+    transparent 100%
+  );
+  background-size: 300% 100%;
+  animation: full-shimmer 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.shimmer-text {
+  white-space: nowrap;
+  font-family: ui-monospace, monospace;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  color: transparent;
+  background: linear-gradient(
+    90deg,
+    rgba(110, 110, 118, 0.5) 0%,
+    rgba(110, 110, 118, 0.5) 35%,
+    rgba(210, 220, 235, 1) 50%,
+    rgba(110, 110, 118, 0.5) 65%,
+    rgba(110, 110, 118, 0.5) 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: full-shimmer 3.5s linear infinite;
+}
