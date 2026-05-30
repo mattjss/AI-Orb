@@ -23,21 +23,23 @@ export default function Home() {
             {/* full-bar shimmer sweep */}
             <div className="pill-shimmer" />
 
-            {/* orb — 36px container, 32px iframe inset 2px to hide fuzzy edge */}
-            <div style={{
-              width: 36, height: 36,
-              minWidth: 36, flexShrink: 0,
+            {/* orb — iframe overscaled 120% so no black letterbox at edges */}
+            <div className="orb-mask" style={{
+              width: 38, height: 38,
+              minWidth: 38, flexShrink: 0,
               position: "relative",
-              background: "#0A0A0B",
-              borderRadius: "50%",
+              overflow: "hidden",
             }}>
-              <div className="orb-mask" style={{ position: "absolute", left: 2, top: 2, width: 32, height: 32 }}>
-                <iframe
-                  src={ORB_URL}
-                  title="AI orb"
-                  style={{ position: "absolute", left: 0, top: 0, width: "100%", height: "100%", border: "none" }}
-                />
-              </div>
+              <iframe
+                src={ORB_URL}
+                title="AI orb"
+                style={{
+                  position: "absolute",
+                  left: "-25%", top: "-25%",
+                  width: "150%", height: "150%",
+                  border: "none",
+                }}
+              />
             </div>
 
             {/* shimmer text */}
