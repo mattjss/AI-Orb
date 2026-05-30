@@ -26,8 +26,8 @@ export default function Home() {
         background: "#101010",
         display: "flex", alignItems: "center", justifyContent: "center",
         flexShrink: 0,
-        overflow: "hidden",
       }}>
+        {/* Pill */}
         <div style={{
           width: 358,
           height: 52,
@@ -38,36 +38,31 @@ export default function Home() {
           alignItems: "center",
           paddingLeft: 8,
           paddingRight: 8,
-          paddingTop: 8,
-          paddingBottom: 8,
         }}>
-          {/* Orb circle */}
+          {/* Orb — outer ring */}
           <div style={{
             width: 36,
             height: 36,
             minWidth: 36,
             flexShrink: 0,
-            position: "relative",
             borderRadius: "50%",
             border: "1px solid #252527",
-            overflow: "hidden",
             background: "#0A0A0B",
-            boxSizing: "border-box",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}>
-            <div
-              data-us-project="1pR6h5M1hBZZGegkYa8W"
-              style={{
-                position: "absolute",
-                left: "50%",
-                top: "50%",
-                width: 1440,
-                height: 900,
-                transform: "translate(-50%, -50%) scale(0.0378)",
-                transformOrigin: "center center",
-                pointerEvents: "none",
-              }}
-            />
+            {/* Inner circle clips the Unicorn canvas */}
+            <div className="orb-circle">
+              <div className="orb-us-wrap">
+                <div
+                  data-us-project="1pR6h5M1hBZZGegkYa8W"
+                  style={{ width: "1440px", height: "900px" }}
+                />
+              </div>
+            </div>
           </div>
+
           {/* Shimmer text */}
           <span style={{
             marginLeft: 8,
