@@ -19,12 +19,10 @@ export default function Home() {
           <div className="pill-border" />
 
           <div className="pill-inner">
-            <div className="pill-shimmer" />
-
-            {/* orb — 34px circle, iframe 150% to fill with no black edge */}
+            {/* orb — 28px circle, iframe 150% to fill with no black edge */}
             <div className="orb-mask" style={{
-              width: 34, height: 34,
-              minWidth: 34, flexShrink: 0,
+              width: 28, height: 28,
+              minWidth: 28, flexShrink: 0,
               position: "relative",
               overflow: "hidden",
             }}>
