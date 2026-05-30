@@ -8,28 +8,34 @@
 }
 
 @keyframes shimmer {
-  0% { background-position: 200% center; }
+  0%   { background-position: 200% center; }
   100% { background-position: -200% center; }
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-}
+body { margin: 0; min-height: 100vh; }
 
-.orb-frame {
-  contain: layout style;
-}
-
-.orb-mask {
+/* Circle container — force GPU layer so overflow+border-radius clips correctly in Safari */
+.orb-circle {
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   overflow: hidden;
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Ccircle cx='17' cy='17' r='17' fill='white'/%3E%3C/svg%3E");
-  mask-size: 100% 100%;
-  mask-repeat: no-repeat;
-  mask-position: center;
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Ccircle cx='17' cy='17' r='17' fill='white'/%3E%3C/svg%3E");
-  -webkit-mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
+  position: relative;
+  background: #0A0A0B;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Scale the full 1440x900 Unicorn canvas down to fill the 34px circle */
+.orb-us-wrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1440px;
+  height: 900px;
+  margin-left: -720px;
+  margin-top: -450px;
+  transform: translate(-50%, -50%) scale(0.0378);
+  transform-origin: center center;
+  pointer-events: none;
 }
