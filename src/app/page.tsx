@@ -1,21 +1,33 @@
 "use client";
+import Script from "next/script";
+import { useEffect } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    const w = window as any;
+    if (w.UnicornStudio?.isInitialized === false) w.UnicornStudio.init();
+  }, []);
+
   return (
-    <div style={{
-      width: "100vw", height: "100vh",
-      background: "#101010",
-      display: "flex", alignItems: "center", justifyContent: "center",
-    }}>
+    <>
+      <Script
+        src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.0.5/dist/unicornStudio.umd.js"
+        strategy="afterInteractive"
+        onLoad={() => { (window as any).UnicornStudio?.init(); }}
+      />
       <div style={{
-        width: 422, height: 422,
+        width: "100vw", height: "100vh",
         background: "#101010",
         display: "flex", alignItems: "center", justifyContent: "center",
-        flexShrink: 0,
-        overflow: "hidden",
       }}>
-        <div
-          style={{
+        <div style={{
+          width: 422, height: 422,
+          background: "#101010",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          flexShrink: 0,
+          overflow: "hidden",
+        }}>
+          <div style={{
             width: 358,
             height: 52,
             borderRadius: 26,
@@ -27,40 +39,45 @@ export default function Home() {
             paddingRight: 8,
             paddingTop: 8,
             paddingBottom: 8,
-          }}
-        >
-          <div
-            className="orb-frame"
-            style={{
-              width: 36,
-              height: 36,
-              minWidth: 36,
-              minHeight: 36,
-              flexShrink: 0,
-              position: "relative",
-              borderRadius: "50%",
-              border: "1px solid #252527",
-              background: "#0A0A0B",
-              boxSizing: "border-box",
-              overflow: "hidden",
-            }}
-          >
+          }}>
             <div
-              className="orb-mask"
+              className="orb-frame"
               style={{
+                width: 36,
+                height: 36,
+                minWidth: 36,
+                minHeight: 36,
+                flexShrink: 0,
+                position: "relative",
+                borderRadius: "50%",
+                border: "1px solid #252527",
+                background: "#0A0A0B",
+                boxSizing: "border-box",
+                overflow: "hidden",
+              }}
+            >
+              <div style={{
                 position: "absolute",
-                left: 1,
-                top: 1,
-                width: 34,
-                height: 34,
+                inset: 0,
                 borderRadius: "50%",
                 overflow: "hidden",
-                background: "#0A0A0B",
-              }}
-            />
-          </div>
-          <span
-            style={{
+              }}>
+                <div
+                  data-us-project="1pR6h5M1hBZZGegkYa8W"
+                  style={{
+                    position: "absolute",
+                    left: "50%",
+                    top: "50%",
+                    width: 1440,
+                    height: 900,
+                    transform: "translate(-50%, -50%) scale(0.0378)",
+                    transformOrigin: "center center",
+                    pointerEvents: "none",
+                  }}
+                />
+              </div>
+            </div>
+            <span style={{
               marginLeft: 8,
               flexShrink: 0,
               whiteSpace: "nowrap",
@@ -74,12 +91,12 @@ export default function Home() {
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               animation: "shimmer 3.5s linear infinite",
-            }}
-          >
-            Agent thinking...
-          </span>
+            }}>
+              Agent thinking...
+            </span>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
