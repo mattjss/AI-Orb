@@ -1,12 +1,15 @@
 @import "tailwindcss";
 
+@layer base {
+  *, *::before, *::after {
+    border-width: 0;
+    outline: none;
+  }
+}
+
 @keyframes shimmer {
-  0% {
-    background-position: 200% center;
-  }
-  100% {
-    background-position: -200% center;
-  }
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
 }
 
 body {
@@ -14,18 +17,13 @@ body {
   min-height: 100vh;
 }
 
-/* Orb frame: keep circle shape and border visible */
 .orb-frame {
   contain: layout style;
 }
 
-/* Unicorn injects into .orb-embed; we only scale the div, no overrides on canvas */
-
-/* Circular clip: border-radius + overflow so orb is a circle; border sits outside on .orb-frame */
 .orb-mask {
   border-radius: 50%;
   overflow: hidden;
-  /* SVG mask as backup for crisp circle */
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Ccircle cx='17' cy='17' r='17' fill='white'/%3E%3C/svg%3E");
   mask-size: 100% 100%;
   mask-repeat: no-repeat;
