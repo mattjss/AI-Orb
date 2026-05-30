@@ -1,10 +1,7 @@
 @import "tailwindcss";
 
 @layer base {
-  *, *::before, *::after {
-    border-width: 0;
-    outline: none;
-  }
+  *, *::before, *::after { border-width: 0; outline: none; }
 }
 
 @keyframes shimmer {
@@ -13,29 +10,3 @@
 }
 
 body { margin: 0; min-height: 100vh; }
-
-/* Circle container — force GPU layer so overflow+border-radius clips correctly in Safari */
-.orb-circle {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  overflow: hidden;
-  position: relative;
-  background: #0A0A0B;
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-}
-
-/* Scale the full 1440x900 Unicorn canvas down to fill the 34px circle */
-.orb-us-wrap {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 1440px;
-  height: 900px;
-  margin-left: -720px;
-  margin-top: -450px;
-  transform: translate(-50%, -50%) scale(0.0378);
-  transform-origin: center center;
-  pointer-events: none;
-}
