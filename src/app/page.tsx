@@ -21,22 +21,8 @@ export default function Home() {
             {/* full-bar shimmer sweep */}
             <div className="pill-shimmer" />
 
-            {/* orb circle — iframe avoids React script init issues */}
-            <div style={{
-              width: 40, height: 40,
-              minWidth: 40, flexShrink: 0,
-              borderRadius: "50%",
-              overflow: "hidden",
-              transform: "translateZ(0)",
-            }}>
-              <iframe
-                src="unicorn-orb.html"
-                width={40}
-                height={40}
-                style={{ display: "block", border: "none" }}
-                scrolling="no"
-              />
-            </div>
+            {/* css glowing orb */}
+            <div className="orb-circle" />
 
             {/* shimmer text */}
             <span className="shimmer-text">Agent thinking...</span>
