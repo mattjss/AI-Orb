@@ -38,7 +38,7 @@ export default function Home() {
       const analyser = ctx.createAnalyser();
       analyser.fftSize = 512;
       analyserRef.current = analyser;
-      dataArrayRef.current = new Uint8Array(analyser.frequencyBinCount);
+      dataArrayRef.current = new Uint8Array(analyser.frequencyBinCount) as Uint8Array<ArrayBuffer>;
       ctx.createMediaStreamSource(stream).connect(analyser);
 
       setAgentState("listening");
