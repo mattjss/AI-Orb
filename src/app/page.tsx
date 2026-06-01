@@ -6,6 +6,17 @@ const ORB_URL = "https://www.unicorn.studio/embed/1pR6h5M1hBZZGegkYa8W";
 
 type AgentState = "idle" | "listening" | "thinking";
 
+const PARTICLES = [
+  { phase: 0,   radius: 116, size: 2.5, dur: 20 },
+  { phase: 90,  radius: 120, size: 2,   dur: 26 },
+  { phase: 180, radius: 114, size: 3,   dur: 17 },
+  { phase: 270, radius: 118, size: 2,   dur: 24 },
+  { phase: 45,  radius: 130, size: 2,   dur: 30 },
+  { phase: 135, radius: 126, size: 3,   dur: 23 },
+  { phase: 225, radius: 132, size: 2.5, dur: 35 },
+  { phase: 315, radius: 128, size: 2,   dur: 28 },
+];
+
 export default function Home() {
   const [agentState, setAgentState] = useState<AgentState>("idle");
   const [volume, setVolume] = useState(0);
@@ -86,10 +97,10 @@ export default function Home() {
   const isThinking = agentState === "thinking";
 
   const orbScale = isThinking ? 1.06 : 1 + volume * 0.16;
-  const orbBrightness = isThinking ? 1.2 : 1 + volume * 1.0;
-  const orbSaturate = isThinking ? 1.3 : 1 + volume * 0.55;
-  const glowRadius = 60 + volume * 120;
-  const glowOpacity = 0.18 + volume * 0.45;
+  const orbBrightness = isThinking ? 1.18 : 1 + volume * 1.1;
+  const orbSaturate = isThinking ? 1.2 : 1 + volume * 0.3;
+  const glowRadius = 56 + volume * 110;
+  const glowOpacity = 0.12 + volume * 0.32;
 
   return (
     <div style={{
@@ -109,14 +120,14 @@ export default function Home() {
         flexShrink: 0,
       }}>
 
-        {/* ambient glow behind orb */}
+        {/* ambient glow — silver/platinum */}
         <div style={{
           position: "absolute",
           width: glowRadius * 2,
           height: glowRadius * 2,
           borderRadius: "50%",
-          background: `radial-gradient(circle, rgba(70,130,255,${glowOpacity}) 0%, transparent 70%)`,
-          filter: `blur(${40 + volume * 24}px)`,
+          background: `radial-gradient(circle, rgba(185,190,208,${glowOpacity}) 0%, transparent 70%)`,
+          filter: `blur(${38 + volume * 20}px)`,
           transform: "translateY(-28px)",
           transition: isThinking
             ? "all 1.2s ease"
@@ -125,9 +136,11 @@ export default function Home() {
           zIndex: 0,
         }} />
 
-        {/* orb + rings */}
+        {/* orb + particles */}
         <div style={{
           position: "relative",
+          width: 202,
+          height: 202,
           zIndex: 1,
           transform: `scale(${orbScale})`,
           filter: `brightness(${orbBrightness}) saturate(${orbSaturate})`,
@@ -135,38 +148,59 @@ export default function Home() {
             ? "transform 1.0s ease, filter 1.0s ease"
             : "transform 0.06s linear, filter 0.08s linear",
         }}>
-          {/* pulse rings — shown when speaking above threshold */}
-          {isListening && [0, 340, 680].map((delay, i) => (
-            volume > 0.08 + i * 0.04 && (
+
+          {/* particle dots */}
+          <div
+            className={`particles state-${agentState}`}
+            style={{
+              position: "absolute",
+              width: 290,
+              height: 290,
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              borderRadius: "50%",
+              pointerEvents: "none",
+            }}
+          >
+            {PARTICLES.map((p, i) => (
               <div
                 key={i}
-                className="pulse-ring"
+                className="particle-orbit"
                 style={{
-                  animationDelay: `${delay}ms`,
-                  opacity: Math.max(0, volume - i * 0.08) * 0.65,
+                  animationDuration: `${p.dur}s`,
+                  animationDelay: `-${(p.phase / 360) * p.dur}s`,
+                }}
+              >
+                <div
+                  className="particle-dot"
+                  style={{
+                    width: p.size,
+                    height: p.size,
+                    top: `calc(50% - ${p.radius}px)`,
+                    left: `calc(50% - ${p.size / 2}px)`,
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* metal border frame + orb */}
+          <div className="orb-frame">
+            <div className="orb-inner">
+              <iframe
+                src={ORB_URL}
+                title="AI orb"
+                style={{
+                  position: "absolute",
+                  left: "-25%", top: "-25%",
+                  width: "150%", height: "150%",
+                  border: "none",
                 }}
               />
-            )
-          ))}
-
-          {/* orb iframe */}
-          <div style={{
-            width: 196, height: 196,
-            borderRadius: "50%",
-            overflow: "hidden",
-            position: "relative",
-          }}>
-            <iframe
-              src={ORB_URL}
-              title="AI orb"
-              style={{
-                position: "absolute",
-                left: "-25%", top: "-25%",
-                width: "150%", height: "150%",
-                border: "none",
-              }}
-            />
+            </div>
           </div>
+
         </div>
 
         {/* status label */}

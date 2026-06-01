@@ -6,19 +6,87 @@
 
 body { margin: 0; min-height: 100vh; }
 
-/* ─── pulse rings ─────────────────────────────────────────── */
-@keyframes ring-expand {
-  0%   { transform: scale(1);    opacity: 1; }
-  100% { transform: scale(1.75); opacity: 0; }
+/* ─── metal border ────────────────────────────────────────── */
+@property --border-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+
+@keyframes spin-border {
+  from { --border-angle: 0deg; }
+  to   { --border-angle: 360deg; }
 }
 
-.pulse-ring {
-  position: absolute;
-  inset: -6px;
+.orb-frame {
+  width: 202px;
+  height: 202px;
   border-radius: 50%;
-  border: 1px solid rgba(100, 160, 255, 0.55);
-  animation: ring-expand 1.4s ease-out infinite;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--border-angle),
+    transparent 0deg,
+    transparent 290deg,
+    rgba(130, 135, 148, 0.25) 330deg,
+    rgba(200, 208, 220, 0.80) 354deg,
+    rgba(238, 242, 250, 0.95) 359deg,
+    transparent 360deg
+  );
+  animation: spin-border 5s linear infinite;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.orb-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #101010;
+}
+
+/* ─── particles ───────────────────────────────────────────── */
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.particles {
+  position: absolute;
+  inset: 0;
   pointer-events: none;
+}
+
+.particle-orbit {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  animation: orbit-spin linear infinite;
+  transform-origin: 50% 50%;
+}
+
+.particle-dot {
+  position: absolute;
+  left: 50%;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  background: rgba(210, 215, 228, 0.85);
+  transition: opacity 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* idle — barely visible, slow drift */
+.state-idle .particle-dot {
+  opacity: 0.15;
+  box-shadow: none;
+}
+
+/* listening — bright, glowing */
+.state-listening .particle-dot {
+  opacity: 0.55;
+  box-shadow: 0 0 5px rgba(210, 215, 228, 0.5);
+}
+
+/* thinking — medium, gentle pulse */
+.state-thinking .particle-dot {
+  opacity: 0.28;
+  box-shadow: 0 0 3px rgba(210, 215, 228, 0.3);
 }
 
 /* ─── status text ─────────────────────────────────────────── */
@@ -33,18 +101,18 @@ body { margin: 0; min-height: 100vh; }
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(130, 130, 142, 0.6);
+  color: rgba(155, 155, 168, 0.55);
   transition: color 0.4s ease;
   user-select: none;
 }
 
 .status-text.state-listening {
-  color: rgba(140, 175, 255, 0.8);
+  color: rgba(200, 205, 218, 0.85);
   animation: text-breathe 1.6s ease-in-out infinite;
 }
 
 .status-text.state-thinking {
-  color: rgba(170, 170, 185, 0.65);
+  color: rgba(175, 178, 192, 0.65);
   animation: text-breathe 2.2s ease-in-out infinite;
 }
 
@@ -53,9 +121,9 @@ body { margin: 0; min-height: 100vh; }
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  color: rgba(160, 160, 172, 0.75);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(155, 158, 172, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -64,9 +132,9 @@ body { margin: 0; min-height: 100vh; }
 }
 
 .mic-btn:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.18);
-  color: rgba(220, 220, 230, 0.9);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(200, 205, 218, 0.22);
+  color: rgba(215, 218, 230, 0.9);
   transform: scale(1.05);
 }
 
@@ -75,9 +143,9 @@ body { margin: 0; min-height: 100vh; }
 }
 
 .mic-btn.state-listening {
-  background: rgba(70, 120, 255, 0.12);
-  border-color: rgba(90, 140, 255, 0.35);
-  color: rgba(140, 175, 255, 0.85);
+  background: rgba(200, 205, 218, 0.08);
+  border-color: rgba(200, 208, 225, 0.28);
+  color: rgba(205, 210, 225, 0.85);
 }
 
 .mic-btn:disabled {
