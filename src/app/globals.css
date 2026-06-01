@@ -6,108 +6,81 @@
 
 body { margin: 0; min-height: 100vh; }
 
-/* ─── animated border angle ───────────────────────────────── */
-@property --angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
+/* ─── pulse rings ─────────────────────────────────────────── */
+@keyframes ring-expand {
+  0%   { transform: scale(1);    opacity: 1; }
+  100% { transform: scale(1.75); opacity: 0; }
 }
 
-/* ─── keyframes ───────────────────────────────────────────── */
-@keyframes spin-border {
-  from { --angle: 0deg; }
-  to   { --angle: 360deg; }
-}
-
-/* text glint synced to border comet — same 6s duration */
-@keyframes text-glint {
-  0%, 100% { background-position: 220% center; }
-  45%, 65% { background-position: -220% center; }
-}
-
-/* ─── orb SVG circle mask ─────────────────────────────────── */
-.orb-mask {
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='14' fill='white'/%3E%3C/svg%3E");
-  mask-size: 100% 100%;
-  mask-repeat: no-repeat;
-  mask-position: center;
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='14' fill='white'/%3E%3C/svg%3E");
-  -webkit-mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
+.pulse-ring {
+  position: absolute;
+  inset: -6px;
   border-radius: 50%;
-  overflow: hidden;
+  border: 1px solid rgba(100, 160, 255, 0.55);
+  animation: ring-expand 1.4s ease-out infinite;
+  pointer-events: none;
 }
 
-/* ─── pill ────────────────────────────────────────────────── */
-.pill-outer {
-  position: relative;
-  display: inline-flex;
-  padding: 1px;
-  border-radius: 22px;
+/* ─── status text ─────────────────────────────────────────── */
+@keyframes text-breathe {
+  0%, 100% { opacity: 0.45; }
+  50%       { opacity: 0.85; }
 }
 
-/* single comet tracing the pill edge — the only motion effect */
-.pill-border {
-  position: absolute;
-  inset: 0;
-  border-radius: 22px;
-  /* static dim base so the pill always has definition */
-  background: rgba(255, 255, 255, 0.05);
-  animation: spin-border 6s linear infinite;
-}
-
-.pill-border::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 22px;
-  background: conic-gradient(
-    from var(--angle),
-    rgba(255, 255, 255, 0.82) 0deg,
-    rgba(200, 202, 210, 0.38) 9deg,
-    rgba(130, 132, 140, 0.12) 20deg,
-    transparent 38deg,
-    transparent 360deg
-  );
-  animation: spin-border 6s linear infinite;
-}
-
-.pill-inner {
-  position: relative;
-  width: 264px;
-  height: 40px;
-  border-radius: 21px;
-  background: linear-gradient(135deg, #111113 0%, #0a0a0c 100%);
-  display: flex;
-  align-items: center;
-  padding: 0 14px 0 6px;
-  gap: 9px;
-  z-index: 1;
-  /* faint inner edge so pill reads cleanly when comet is far side */
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
-}
-
-/* text glint: same 6s as the border comet so they feel like one system */
-.shimmer-text {
-  white-space: nowrap;
+.status-text {
   font-family: var(--font-jetbrains), ui-monospace, monospace;
   font-weight: 300;
   font-size: 10px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: transparent;
-  background: linear-gradient(
-    90deg,
-    rgba(95, 95, 103, 0.7) 0%,
-    rgba(95, 95, 103, 0.7) 28%,
-    rgba(218, 220, 230, 1) 50%,
-    rgba(95, 95, 103, 0.7) 72%,
-    rgba(95, 95, 103, 0.7) 100%
-  );
-  background-size: 220% 100%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: text-glint 6s ease-in-out infinite;
+  color: rgba(130, 130, 142, 0.6);
+  transition: color 0.4s ease;
+  user-select: none;
+}
+
+.status-text.state-listening {
+  color: rgba(140, 175, 255, 0.8);
+  animation: text-breathe 1.6s ease-in-out infinite;
+}
+
+.status-text.state-thinking {
+  color: rgba(170, 170, 185, 0.65);
+  animation: text-breathe 2.2s ease-in-out infinite;
+}
+
+/* ─── mic button ──────────────────────────────────────────── */
+.mic-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: rgba(160, 160, 172, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.mic-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: rgba(220, 220, 230, 0.9);
+  transform: scale(1.05);
+}
+
+.mic-btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.mic-btn.state-listening {
+  background: rgba(70, 120, 255, 0.12);
+  border-color: rgba(90, 140, 255, 0.35);
+  color: rgba(140, 175, 255, 0.85);
+}
+
+.mic-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
 }
